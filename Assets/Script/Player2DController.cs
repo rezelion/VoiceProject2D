@@ -3,12 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Windows.Speech;
 
 public class Player2DController : MonoBehaviour
 {
     private KeywordRecognizer kwRec;
+    //private GrammarRecognizer grammarRecognizer;
     private Dictionary<string, Action> action = new Dictionary<string, Action>();
+    public Text Listening;
     public float addTurbo;
     public float MovementSpeed = 1f;
     public float JumpingForce = 1f;
@@ -45,24 +48,78 @@ public class Player2DController : MonoBehaviour
                 action.Add("box jump!", Jump);
                 action.Add("box jump?", Jump);
                 action.Add("box jump.", Jump);
+                action.Add("jumping", Jump);
+                action.Add("jumping!", Jump);
+                action.Add("jumping?", Jump);
+                action.Add("jumping.", Jump);
+                action.Add("jumped", Jump);
+                action.Add("jumped!", Jump);
+                action.Add("jumped?", Jump);
+                action.Add("jumped.", Jump);
+                action.Add("go up", Jump);
+                action.Add("go up!", Jump);
+                action.Add("go up?", Jump);
+                action.Add("go up.", Jump);
+
+
 
                 //move front speech list
                 action.Add("box go", isMove);
                 action.Add("box go!", isMove);
                 action.Add("box go?", isMove);
                 action.Add("box go.", isMove);
+                action.Add("go", isMove);
+                action.Add("go!", isMove);
+                action.Add("go?", isMove);
+                action.Add("go.", isMove);
+                action.Add("books go", isMove);
+                action.Add("Run", isMove);
+                action.Add("Walk", isMove);
+                action.Add("Move Front", isMove);
+                action.Add("Move Front!", isMove);
+                action.Add("Move Front?", isMove);
+                action.Add("Move Front.", isMove);
+                action.Add("Forward", isMove);
+                action.Add("Forwards", isMove);
+                action.Add("Move Forward", isMove);
+                action.Add("Move Forwards", isMove);
+                action.Add("go Forward", isMove);
 
                 //move back speech list
                 action.Add("box reflect", isReversed);
                 action.Add("box reflect!", isReversed);
                 action.Add("box reflect?", isReversed);
                 action.Add("box reflect.", isReversed);
+                action.Add("back", isReversed);
+                action.Add("back!", isReversed);
+                action.Add("back?", isReversed);
+                action.Add("back.", isReversed);
+                action.Add("books reflect", isReversed);
+                action.Add("books back", isReversed);
+                action.Add("Move Back", isReversed);
+                action.Add("Move Back!", isReversed);
+                action.Add("Move Back?", isReversed);
+                action.Add("Move Back.", isReversed);
+                action.Add("Backward", isReversed);
+                action.Add("Backwards", isReversed);
+                action.Add("Move Backward", isReversed);
+                action.Add("go Backward", isReversed);
 
                 //stop speech list
                 action.Add("box stop", isStop);
                 action.Add("box stop!", isStop);
                 action.Add("box stop?", isStop);
                 action.Add("box stop.", isStop);
+                action.Add("stop", isStop);
+                action.Add("stop!", isStop);
+                action.Add("stop?", isStop);
+                action.Add("stop.", isStop);
+                action.Add("stopped", isStop);
+                action.Add("stopped!", isStop);
+                action.Add("stopped?", isStop);
+                action.Add("stopped.", isStop);
+                action.Add("books stop", isStop);
+
 
                 //combination speech list
                 //action.Add("go and jump", goJump);
@@ -85,6 +142,8 @@ public class Player2DController : MonoBehaviour
                 kwRec = new KeywordRecognizer(action.Keys.ToArray());
                 kwRec.OnPhraseRecognized += RecognizedSpeech;
                 kwRec.Start();
+
+
             }
             else
             {
@@ -99,7 +158,7 @@ public class Player2DController : MonoBehaviour
     {
         _rB.velocity = new Vector2(Move.x * (MovementSpeed * 10 + addTurbo)  * Time.deltaTime, _rB.velocity.y);
     }
-
+    
     // Update is called once per frame
     void Update()
     {
@@ -139,14 +198,27 @@ public class Player2DController : MonoBehaviour
         
 
     }
+
     private void RecognizedSpeech(PhraseRecognizedEventArgs speech)
     {
-        Debug.Log(speech.text);
+        Listening.text = speech.text;
         action[speech.text].Invoke();
     }
     private void Attention()
     {
         
+    }
+
+    public void Speechmode(bool s) 
+    {
+        if(s == true)
+        {
+            SpeechMode = true;
+        }
+        else
+        {
+            SpeechMode = false;
+        }
     }
 
     public void ctrlDisabled(bool dis)

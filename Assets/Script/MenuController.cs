@@ -68,6 +68,12 @@ public class MenuController : MonoBehaviour
         btnStage1.onClick.AddListener(() => btnSelect(6));
     }
 
+    public void SetRes(int res)
+    {
+        Resolution resolution = resolutions[res];
+        Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+
+    }
     public void SetVolume(float vol)
     {
         audioMixer.SetFloat("vol", vol);

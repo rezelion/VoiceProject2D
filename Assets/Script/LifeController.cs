@@ -36,6 +36,7 @@ public class LifeController : MonoBehaviour
             LifePoint -= 1;
             LifeBox[1].SetActive(false);
             Player.transform.position = EarlySpawn.position;
+            timeOutController.timeAdd(30);
             playerController.isStop();
         }
         else if(LifePoint == 2)
@@ -43,12 +44,14 @@ public class LifeController : MonoBehaviour
             LifePoint -= 1;
             LifeBox[2].SetActive(false);
             Player.transform.position = EarlySpawn.position;
+            timeOutController.timeAdd(30);
             playerController.isStop();
         }
         else if(LifePoint > 2)
         {
             LifePoint -= 1;
             Player.transform.position = EarlySpawn.position;
+            timeOutController.timeAdd(30);
             playerController.isStop();
         }
     }

@@ -1,0 +1,14 @@
+<grammar version="1.0" xml:lang="ind" root="main" xmlns="http://www.w3.org/2001/06/grammar"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.w3.org/2001/06/grammar
+                            http://www.w3.org/TR/speech-grammar/grammar.xsd">
+ 
+    <rule id="main">
+        <one-of>
+            <item>jalan</item>
+            <item>berhenti</item>
+            <item>lompat</item>
+        </one-of>
+    </rule>
+ 
+</grammar>

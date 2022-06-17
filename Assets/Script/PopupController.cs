@@ -8,17 +8,48 @@ public class PopupController : MonoBehaviour
     public Player2DController playerController;
     public TimeOutController Time;
     public Button btnRestart, btnExitOnLobby;
-    public bool finishMode;
 
+    [SerializeField]
+    private bool finishMode;
+    [SerializeField]
+    private bool pauseMode;
+    int d ;
     private void Start()
     {
         btnExitOnLobby.onClick.AddListener(() => actionSelect(0));
         btnRestart.onClick.AddListener(() => actionSelect(1));
+
+    }
+
+    private void Update()
+    {
+        
+        if (pauseMode == true)
+        {
+            
+            if (Input.GetButtonDown("Cancel"))
+            {
+                showPopup();
+
+                if (d == 1)
+                {
+                    d -= 1;
+
+                    Time.timeActive(true);
+                    selectedUI.SetActive(false);
+                    playerController.ctrlDisabled(false);
+                }
+                else
+                {
+                    d += 1;
+                }
+            }
+            
+        }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         showPopup();
-        
     }
 
     public void showPopup() {
@@ -27,6 +58,7 @@ public class PopupController : MonoBehaviour
         {
             Time.timeActive(false);
         }
+        
 
         selectedUI.SetActive(true);
         playerController.ctrlDisabled(true);

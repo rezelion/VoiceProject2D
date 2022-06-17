@@ -42,7 +42,7 @@ public class FlowController : MonoBehaviour
             //Debug.Log("Activate Object!");
             //MP.SetActive(true);
             //TriggerToHide.SetActive(false);
-            Time.timeAdd(15);
+            Time.timeAdd(30);
             ClearUI.SetActive(true);
         }
     }
