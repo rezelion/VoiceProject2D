@@ -201,7 +201,29 @@ public class Player2DController : MonoBehaviour
 
     private void RecognizedSpeech(PhraseRecognizedEventArgs speech)
     {
-        Listening.text = speech.text;
+        
+        //Fixing Output
+        if ((speech.text == "box go!") || (speech.text == "box go?") || (speech.text == "box go.") || (speech.text == "books go"))
+        {
+            Listening.text = "box go";
+        }
+        else if ((speech.text == "box stop!") || (speech.text == "box stop?") || (speech.text == "box stop.") || (speech.text == "books stop"))
+        {
+            Listening.text = "box stop";
+        }
+        else if ((speech.text == "box reflect!") || (speech.text == "box reflect?") || (speech.text == "box reflect.") || (speech.text == "books reflect"))
+        {
+            Listening.text = "box reflect";
+        }
+        else if ((speech.text == "box jump!") || (speech.text == "box jump?") || (speech.text == "box jump.") || (speech.text == "books jump"))
+        {
+            Listening.text = "box jump";
+        }
+        else
+        {
+            Listening.text = speech.text;
+        }
+
         action[speech.text].Invoke();
     }
     private void Attention()
